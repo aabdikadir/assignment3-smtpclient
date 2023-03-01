@@ -1,3 +1,10 @@
+""""
+    Name: Abdikadir Ali
+    Class: CS-GY 6843 2023 Spring CF01 CF02
+    Assignment: SMTPClient
+    Due Date: 03/04/2023
+
+"""
 from socket import *
 
 
