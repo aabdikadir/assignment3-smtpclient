@@ -1,3 +1,7 @@
+"""
+Name: Abdikadir Ali
+"""
+
 from socket import *
 
 
@@ -10,6 +14,8 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
     # Fill in start
+    clientSocket = socket(AF_INET, SOCK_STREAM)
+    clientSocket.connect(mailserver)
     # Fill in end
 
     recv = clientSocket.recv(1024).decode()
@@ -27,26 +33,44 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send MAIL FROM command and handle server response.
     # Fill in start
+    mailFrom = 'MAIL FROM: <aaa10001@nyu.edu>\r\n'
+    clientSocket.send(mailFrom.encode())      
+    recv2 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send RCPT TO command and handle server response.
     # Fill in start
+    rcpt = 'RCPT TO: <aaa10001@nyu.edu>\r\n'
+    clientSocket.send(rcpt.encode())
+    recv3 = clientSocket.recv(1024).decode()
     # Fill in end
-
+    
     # Send DATA command and handle server response.
     # Fill in start
+    data = 'DATA\r\n'
+    clientSocket.send(data.encode())
+    recv4 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send message data.
     # Fill in start
+    clientSocket.send(bytes((msg + endmsg).encode()))
+    recv5 = clientSocket.recv(1024)
     # Fill in end
 
     # Message ends with a single period, send message end and handle server response.
     # Fill in start
+    clientSocket.send(endmsg.encode())
+    recv6 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send QUIT command and handle server response.
     # Fill in start
+    quitCommand = 'QUIT\r\n'
+    recv7 = clientSocket.recv(1024).decode()
+    clientSocket.send(quitCommand.encode())
+    recv5 = clientSocket.recv(1024).decode()
+    clientSocket.close()
     # Fill in end
 
 
